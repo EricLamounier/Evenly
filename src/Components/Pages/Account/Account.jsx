@@ -17,9 +17,10 @@ export default function Account() {
         const uid = getUid();
         pegaDados(uid)
         .then(data =>{
-            setName(data.user_name);
-            setEmail(data.user_email);
-            setTipo(data.user_tipo);
+            
+            setName(data[0].user_name);
+            setEmail(data[0].user_email);
+            setTipo(data[0].user_tipo);
         })
 
     }, [])
