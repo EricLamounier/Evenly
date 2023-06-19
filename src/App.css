@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilizando a barra de rolagem vertical */
+::-webkit-scrollbar {
+  width: 7px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Cor de fundo da área da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Cor do "polegar" (a parte arrastável da barra de rolagem) */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Cor do "polegar" ao passar o mouse */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #252525;
+  height: 100vh;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+main {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.App > div:nth-child(1) {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 450px;
+  align-items: center;
+  margin-top: 30px;
+  padding: 15px;
+}
+
+.authForm label {
+  position: relative;
+  top: -26px;
+  left: 15px;
+  font-size: 14px;
+  height: 20px;
+  cursor: text;
+}
+
+.authForm input,
+.authForm label {
+  transition: 0.2s;
+  color: #dfdfdf;
+}
+
+.authForm input[type="text"],
+.authForm input[type="password"],
+.authForm input[type="email"] {
+  font-size: 16px;
+  height: 25px;
+  padding: 15px 10px;
+  width: 100% !important;
+  background: 0;
+  border: 1px solid transparent;
+  outline: 0;
+  color: #fff;
+  background-color: #ffffff5f;
+  border-radius: 50px;
+}
+
+.authForm .inputBox input[type="text"]:focus + label,
+.authForm .inputBox input[type="text"]:valid + label,
+.authForm .inputBox input[type="password"]:focus + label,
+.authForm .inputBox input[type="password"]:valid + label {
+  top: -48px;
+  font-size: 12px;
+  color: #c4c4c4;
+}
+
+.authForm button {
+  width: 50%;
+  height: 35px;
+  background-color: rgb(15, 15, 122);
+  padding: 20px 40px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.1s;
+  outline: 2px solid transparent;
+}
+
+.authForm button:hover {
+  background-color: rgb(46, 46, 168);
+  outline-color: rgb(46, 46, 168);
+  outline-offset: 1px;
+}
+
+.authLink {
+  padding: 5px 0;
+  color: #fff;
+}
+
+.invalido {
+  border-color: red !important;
+}

@@ -1,0 +1,23 @@
+body {
+    background-image: url('../../Images/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#authContainer > main {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#authContainer > main > div {
+    width: 80%;
+    max-width: 550px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

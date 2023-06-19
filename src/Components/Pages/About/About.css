@@ -1,0 +1,63 @@
+.about main{
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  color: #fff;
+}
+
+.about section {
+  width: 80%;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ffffff49;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.aboutProject {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aboutProject img  {
+  filter: drop-shadow(1px 1px 2px rgb(255, 255, 255));
+  padding: 10px;
+  max-height: 140px;
+}
+
+.about section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about section div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+  
+.aboutEric {
+  flex-direction: row-reverse;
+}
+  
+.aboutPaulo {
+  flex-direction: row;
+}
+
+.about .person {
+  max-width: 200px;
+  background-color: red;
+  border-radius: 100%;
+  box-shadow: 0px 0px 5px #fff;
+}
+
+@media screen and (max-width: 800px) {
+  .aboutPaulo,
+  .aboutEric {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,19 @@
+.notFound .back {
+    max-width: 250px;
+    background-color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #b7a0a0;
+    color: #1b1b1b;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.1s;
+    margin-top: 50px;
+}
+
+.notFound .back:hover {
+    background-color: #0f0f3a;
+    color: #fff;
+    box-shadow: 1px 1px 3px #000;
+}
