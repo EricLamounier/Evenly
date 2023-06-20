@@ -2,7 +2,7 @@ import './EditarConta.css';
 import BoxPage from '../../BoxPage/BoxPage';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { inserirDadosNoBancoDeDados } from '../../../Authentication/InsereDados';
+import { inserirDadosNoBancoDeDados } from '../../../Authentication/User';
 import Loading from '../../Loading/Loading';
 import { changeEmail } from '../../../Firebase/Authentication';
 import { resetPassword } from '../../../Firebase/Authentication';

@@ -11,6 +11,7 @@ import NotFound from "../Pages/NotFound/NotFound";
 import Account from "../Pages/Account/Account";
 import EditarConta from '../Pages/EditarConta/EditarConta'
 import { isLoggedIn } from "../../Firebase/Authentication";
+import CriarEvento from "../Pages/CriarEvento/CriarEvento";
 
 export default function Rotas() {
   return (
@@ -26,7 +27,7 @@ export default function Rotas() {
 
         <Route path="/cadastro" element={<Cadastro />} />
 
-        <Route path="/auth/reset_password" element={<ResetPassword />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
 
         <Route path="*" element={<NotFound />} />
         
@@ -38,8 +39,12 @@ export default function Rotas() {
           <Route index element={<Account />} />
         </Route>
 
-        <Route path="/editar_conta" element={<PrivateRoute />}>
+        <Route path="/editarConta" element={<PrivateRoute />}>
           <Route index element={<EditarConta />} />
+        </Route>
+
+        <Route path="/criarEvento" element={<PrivateRoute />}>
+          <Route index element={<CriarEvento />} />
         </Route>
       </Routes>
     </Router> 

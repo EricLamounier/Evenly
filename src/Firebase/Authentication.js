@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged, sendPasswordResetEmail, updateEmail } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCoNK9MfSfh14RHfkQ5ZXA2OTJQppcEQcw",
@@ -21,16 +21,15 @@ export function signIn(email, senha, successCallback) {
       const token = user.getIdToken();
       document.cookie = `token=${token}; path=/;`;
       window.location.replace('/home');
-      if (successCallback) 
+        
         successCallback(true);
       return token;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      if (successCallback) 
-        successCallback(false);
-      //console.log('error ' + errorCode + ': ' + errorMessage);
+      successCallback(false);
+      console.log('error ' + errorCode + ': ' + errorMessage);
     });
 }
 
@@ -54,10 +53,10 @@ export function isLoggedIn() {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // O usuário está logado
+        //O usuario esta logado
         resolve(true);
       } else {
-        // O usuário não está logado
+        //O usuario nao esta logado
         resolve(false);
       }
     });
@@ -79,10 +78,10 @@ export function changeEmail(newEmail) {
 
   updateEmail(auth.currentUser, newEmail).then(() => {
     // Email updated!
-    // ...
+    
   }).catch((error) => {
     // An error occurred
-    // ...
+    
     console.log(error);
   });
 }
@@ -92,7 +91,7 @@ export function resetPassword(email){
   sendPasswordResetEmail(auth, email)
   .then(() => {
       // Password reset email sent!
-      // ..
+      
       alert('email sent to ' + email)
   })
   .catch((error) => {
@@ -100,6 +99,6 @@ export function resetPassword(email){
       const errorMessage = error.message;
 
       console.log('error ' + errorCode + ': ' + errorMessage)
-      // ..
+      
   });
 }

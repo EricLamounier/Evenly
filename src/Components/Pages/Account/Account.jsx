@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {getUid} from '../../../Firebase/Authentication';
 import { pegaDados } from '../../../Authentication/PegaDados';
+import NewEventButton from '../../NewEventButton/NewEventButton';
 
 export default function Account() {
 
@@ -11,6 +12,7 @@ export default function Account() {
     const [email, setEmail] = useState('');
     const [tipo, setTipo] = useState('');
     const [uid, setUid] = useState('');
+    const [id, setId] = useState('');
 
     useEffect(()=>{
         
@@ -22,6 +24,7 @@ export default function Account() {
             setEmail(data[0].user_email);
             setTipo(data[0].user_tipo);
             setUid(data[0].user_uid);
+            setId(data[0].user_id);
         })
 
     }, [])
@@ -39,9 +42,11 @@ export default function Account() {
                         }
                     </p>
 
-                    <Link to={`/editar_conta?email=${email}&nome=${name}&tipoUsuario=${tipo}&uid=${uid}`}>
+                    <Link to={`/editarConta?email=${email}&nome=${name}&tipoUsuario=${tipo}&id=${id}&uid=${uid}`}>
                         <button>Editar conta</button>
                     </Link>
+
+                    <NewEventButton />
 
                 </div>
                         

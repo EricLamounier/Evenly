@@ -8,7 +8,7 @@ import Loading from '../../Loading/Loading';
 import { signUp } from '../../../Firebase/Authentication';
 import { validarCadastro } from '../../../Authentication/ValidarCadastro';
 import './Cadastro.css';
-import { inserirDadosNoBancoDeDados } from '../../../Authentication/InsereDados';
+import { inserirDadosNoBancoDeDados } from '../../../Authentication/User';
 
 export default function Cadastro() {
     const [nome, setNome] = useState("");

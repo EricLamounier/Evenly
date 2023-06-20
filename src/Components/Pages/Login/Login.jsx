@@ -89,7 +89,7 @@ export default function Login(){
 
                 <div className="authLinkContainer">
                     <Link className="authLink" to="/cadastro">Criar conta</Link>
-                    <Link className="authLink" to="/auth/reset_password">Esqueceu sua senha?</Link>
+                    <Link className="authLink" to="/resetPassword">Esqueceu sua senha?</Link>
                 </div>
                 <br/>
                 {modal && (
