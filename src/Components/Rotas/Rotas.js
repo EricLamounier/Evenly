@@ -8,8 +8,9 @@ import About from "../Pages/About/About";
 import Contact from "../Pages/ContactUs/Contact";
 import Licence from "../Pages/Licence/Licence";
 import NotFound from "../Pages/NotFound/NotFound";
-import { isLoggedIn } from "../../Firebase/Authentication";
 import Account from "../Pages/Account/Account";
+import EditarConta from '../Pages/EditarConta/EditarConta'
+import { isLoggedIn } from "../../Firebase/Authentication";
 
 export default function Rotas() {
   return (
@@ -35,6 +36,10 @@ export default function Rotas() {
 
         <Route path="/account" element={<PrivateRoute />}>
           <Route index element={<Account />} />
+        </Route>
+
+        <Route path="/editar_conta" element={<PrivateRoute />}>
+          <Route index element={<EditarConta />} />
         </Route>
       </Routes>
     </Router> 

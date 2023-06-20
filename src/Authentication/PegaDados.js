@@ -1,7 +1,5 @@
-import { auth } from "../Firebase/Authentication";
-
 export function pegaDados(uid) {
-    const url = `https://backend-sin143.000webhostapp.com/Server/User.php`;
+    const url = `https://backend-sin143.000webhostapp.com/Server/Authentication.php`;
     
     
     let formData = new FormData();

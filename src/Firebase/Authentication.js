@@ -1,4 +1,4 @@
-import { getAuth, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, sendPasswordResetEmail, updateEmail } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
@@ -64,7 +64,7 @@ export function isLoggedIn() {
   });
 }
 
-export default function getUid() {
+export function getUid() {
   const user = auth.currentUser;
   if (user !== null) {
     const uid = user.uid;
@@ -73,4 +73,33 @@ export default function getUid() {
     const storedUid = localStorage.getItem('uid');
     return storedUid;
   }
+}
+
+export function changeEmail(newEmail) {
+
+  updateEmail(auth.currentUser, newEmail).then(() => {
+    // Email updated!
+    // ...
+  }).catch((error) => {
+    // An error occurred
+    // ...
+    console.log(error);
+  });
+}
+
+export function resetPassword(email){
+
+  sendPasswordResetEmail(auth, email)
+  .then(() => {
+      // Password reset email sent!
+      // ..
+      alert('email sent to ' + email)
+  })
+  .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      console.log('error ' + errorCode + ': ' + errorMessage)
+      // ..
+  });
 }

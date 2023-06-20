@@ -1,11 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoHeader from '../../Images/logo/evenly_row.png'
-
 import AccountButton from '../AccountButton/AccountButton';
+import { useState } from 'react';
+
 export default function Header(props) {
 
     const location = useLocation();
+
+    const [photoUrl, setPhoto] = useState('https://backend-sin143.000webhostapp.com/perfilPhotos/default.svg');
+
 
     return (
         
@@ -18,7 +22,7 @@ export default function Header(props) {
                 props.el === 1 ? (
                 <>
                     <Link to="/account">
-                        <AccountButton img={props.photoPerfil} />
+                        <AccountButton img={photoUrl} />
                     </Link>
                 </>
                  

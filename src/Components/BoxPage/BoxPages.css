@@ -1,0 +1,9 @@
+.boxPage {
+    background-color: #282828;
+}
+
+.boxPage .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

@@ -1,9 +1,14 @@
 import './BoxPages.css';
-
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 export default function BoxPage(props) {
     return (
-        <div>
-            {props.children}
+        <div className='boxPage'>
+            <Header el={1} />
+            <div className='content'>
+                {props.children}
+            </div>
+            <Footer />
         </div>
     );
 }

@@ -1,0 +1,21 @@
+.updateBttn {
+    text-align: center;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    min-width: 150px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: 2px solid transparent;
+    transition: 0.1s;
+    padding: 2px 0;
+    min-height: 25px;
+}
+
+.updateBttn:hover {
+    outline-color: #fff;
+    outline-offset: 1px;
+    background-color: #fff;
+}

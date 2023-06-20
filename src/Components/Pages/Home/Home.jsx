@@ -5,11 +5,9 @@ import Footer from '../../Footer/Footer'
 export default function Home(){
     return (
         <BoxPage>
-          <Header el={1} photoPerfil={-1}/>
           <div className='main'>
             Lista de eventos
           </div>
-          <Footer/>
         </BoxPage>
     )
 }

@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react';
 
 import { auth } from '../../../Firebase/Authentication'
-import { sendPasswordResetEmail } from "firebase/auth";
-
+import { resetPassword } from '../../../Firebase/Authentication';
 import Container from '../../Container/Container';
 
 import './ResetPassword.css'
@@ -13,19 +12,7 @@ export default function ResetPassword(){
     const [email, setEmail] = useState('');
 
     const handleSubmit = (event) => {
-        sendPasswordResetEmail(auth, email)
-        .then(() => {
-            // Password reset email sent!
-            // ..
-            alert('email sent to ' + email)
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-
-            console.log('error ' + errorCode + ': ' + errorMessage)
-            // ..
-        });
+        resetPassword(email);
     }
 
     return (

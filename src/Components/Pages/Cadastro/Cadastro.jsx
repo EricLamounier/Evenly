@@ -55,8 +55,12 @@ export default function Cadastro() {
 
         signUp(email, senha)
         .then((uid) => {
-          console.log(uid, nome, email, tipoUsuario);
-          inserirDadosNoBancoDeDados(uid, nome, email, tipoUsuario)
+          inserirDadosNoBancoDeDados(uid, nome, email, tipoUsuario, 0, (response)=>{
+            if(response){
+              console.log('sucess');
+              window.location.replace("/home");
+            }
+          })
         })
         .catch((error) => {
           setLoading('Cadastrar');

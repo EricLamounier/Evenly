@@ -1,0 +1,11 @@
+.accountDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.accountDetails hr {
+    width: 100%;
+}
