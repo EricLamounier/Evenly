@@ -3,7 +3,7 @@ import BoxPage from '../../BoxPage/BoxPage';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {getUid} from '../../../Firebase/Authentication';
-import { pegaDados } from '../../../Authentication/PegaDados';
+import { pegaDadosUser } from '../../../Authentication/User';
 import NewEventButton from '../../NewEventButton/NewEventButton';
 
 export default function Account() {
@@ -17,7 +17,7 @@ export default function Account() {
     useEffect(()=>{
         
         const uid = getUid();
-        pegaDados(uid)
+        pegaDadosUser(uid)
         .then(data =>{
             
             setName(data[0].user_name);

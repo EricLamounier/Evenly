@@ -2,7 +2,7 @@ import './EditarConta.css';
 import BoxPage from '../../BoxPage/BoxPage';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { inserirDadosNoBancoDeDados } from '../../../Authentication/User';
+import { User } from '../../../Authentication/User';
 import Loading from '../../Loading/Loading';
 import { changeEmail } from '../../../Firebase/Authentication';
 import { resetPassword } from '../../../Firebase/Authentication';
@@ -37,7 +37,7 @@ export default function EditarConta() {
         setLoading(<Loading/>)
         changeEmail(email);
 
-        inserirDadosNoBancoDeDados(uid, name, email, tipoUsuario, 2, (response)=>{
+        User(uid, name, email, tipoUsuario, 2, (response)=>{
             if(response){
                 setLoading('Atualizar registro');
                 alert('Atualizado com sucesso');

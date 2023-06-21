@@ -1,16 +1,20 @@
 import './CriarEvento.css';
 import BoxPage from '../../BoxPage/BoxPage';
 import { useState } from 'react';
+import { Evento } from '../../../Authentication/Evento';
+import { pegaDadosUser } from '../../../Authentication/User';
+import { getUid } from '../../../Firebase/Authentication';
 
 export default function CriarEvento() {
 
     const [titulo, setTitulo] = useState('')
     const [descricao, setDescricao] = useState('');
     const [data, setData] = useState('00-00-0000');
-    const [hora, setHora] = useState('00;00');
+    const [hora, setHora] = useState('00:00');
     const [preco, setPreco] = useState('');
-    const [categoria, setCategoria] = useState('');
+    const [categoria, setCategoria] = useState(0);
     const [images, setImages] = useState([]);
+    const [local, setLocal] = useState('');
 
     const handleCategoria = (e) => {
         setCategoria(e.target.value);
@@ -31,6 +35,14 @@ export default function CriarEvento() {
           reader.readAsDataURL(files[i]);
         }
     };
+
+    const handleSubmit = () =>{
+        const uid = getUid();
+        pegaDadosUser(uid)
+        .then(response => {
+            Evento(response[0].user_id, titulo, descricao, categoria, data, hora, preco, local, 0);
+        })
+    }
 
     return (
         <BoxPage>
@@ -78,17 +90,6 @@ export default function CriarEvento() {
             </div>
 
             <div className='inputBox'>
-                <label>Descrição do evento:</label>
-                <input 
-                    type='text'
-                    value={descricao}
-                    onChange={(e)=>{setDescricao(e.target.value)}}
-                    placeholder='Description' 
-                    required
-                />
-            </div>
-
-            <div className='inputBox'>
                 <label>Categoria</label>
                 <select 
                     name="categoria" 
@@ -117,6 +118,17 @@ export default function CriarEvento() {
             </div>
 
             <div className='inputBox'>
+                <label>Local do evento:</label>
+                <input 
+                    type='text'
+                    value={local}
+                    onChange={(e)=>{setLocal(e.target.value)}}
+                    placeholder='Location' 
+                    required
+                />
+            </div>
+
+            <div className='inputBox'>
                 <label>Imagens do evento:</label>
                 <input 
                     type='file'
@@ -127,7 +139,7 @@ export default function CriarEvento() {
                 />
             </div>
 
-            <button>Criar evento</button>
+            <button onClick={handleSubmit}>Criar evento</button>
         </BoxPage>
     );
 }

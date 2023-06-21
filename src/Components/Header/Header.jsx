@@ -8,11 +8,10 @@ export default function Header(props) {
 
     const location = useLocation();
 
-    const [photoUrl, setPhoto] = useState('https://backend-sin143.000webhostapp.com/perfilPhotos/default.svg');
+    const photoUrl = ('https://backend-sin143.000webhostapp.com/perfilPhotos/default.svg');
 
 
     return (
-        
         <header className="header">
             <div className="logo">
                 <Link to="/home" ><img src={logoHeader} alt="logo evenly" title="Evenly especialmente para você!" /></Link>
@@ -24,8 +23,7 @@ export default function Header(props) {
                     <Link to="/account">
                         <AccountButton img={photoUrl} />
                     </Link>
-                </>
-                 
+                </> 
                  ): 
                  (
                     <div className='links'>
