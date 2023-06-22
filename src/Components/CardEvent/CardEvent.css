@@ -14,7 +14,6 @@
     width: 100%;
     height: 60%;
     object-fit: cover;
-    background-color: rgba(255, 0, 0, 0.463);
     position: relative;
 }
 
@@ -22,7 +21,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background-color: green;
+    background-color: #00002772;
 }
 
 .cardEvent .cardImgBox img:nth-child(2) {
