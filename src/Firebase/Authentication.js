@@ -29,7 +29,6 @@ export function signIn(email, senha, successCallback) {
       const errorCode = error.code;
       const errorMessage = error.message;
       successCallback(false);
-      console.log('error ' + errorCode + ': ' + errorMessage);
     });
 }
 

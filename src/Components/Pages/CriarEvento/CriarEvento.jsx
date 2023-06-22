@@ -1,10 +1,9 @@
 import './CriarEvento.css';
 import BoxPage from '../../BoxPage/BoxPage';
 import { useState } from 'react';
-import { Evento } from '../../../Authentication/Evento';
+import { Evento, enviarImagem } from '../../../Authentication/Evento';
 import { pegaDadosUser } from '../../../Authentication/User';
 import { getUid } from '../../../Firebase/Authentication';
-
 export default function CriarEvento() {
 
     const [titulo, setTitulo] = useState('')
@@ -20,29 +19,26 @@ export default function CriarEvento() {
         setCategoria(e.target.value);
     };
 
-    const handleImageChange = (e) => {
-        const files = e.target.files;
-        const imageList = [];
-    
-        for (let i = 0; i < files.length; i++) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            imageList.push(e.target.result);
-            if (imageList.length === files.length) {
-              setImages(imageList);
-            }
-          };
-          reader.readAsDataURL(files[i]);
-        }
-    };
-
     const handleSubmit = () =>{
         const uid = getUid();
         pegaDadosUser(uid)
         .then(response => {
-            Evento(response[0].user_id, titulo, descricao, categoria, data, hora, preco, local, 0);
+            Evento(response[0].user_id, titulo, descricao, categoria, data, hora, preco, local, 0,
+                (el)=>{
+                    handleImages(el);
+                });
+                alert('cadastrado com sucesso');
         })
     }
+
+    const handleImages = (event_id) => {
+        if(images.length > 0){
+            Object.values(images).forEach((img) => {
+                //envia cada imagem para o banco
+                enviarImagem(img, event_id, 0);
+            });
+        }
+    } 
 
     return (
         <BoxPage>
@@ -74,6 +70,7 @@ export default function CriarEvento() {
                 <label>Data do evento:</label>
                 <input 
                     type='date' 
+                    onChange={(e)=>{setData(e.target.value)}}
                     required
                 />
             </div>
@@ -134,11 +131,10 @@ export default function CriarEvento() {
                     type='file'
                     multiple
                     accept="image/*"
-                    onChange={handleImageChange}
+                    onChange={(e)=>{setImages(e.target.files)}}
                     required
                 />
             </div>
-
             <button onClick={handleSubmit}>Criar evento</button>
         </BoxPage>
     );

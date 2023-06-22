@@ -8,7 +8,7 @@ export default function Header(props) {
 
     const location = useLocation();
 
-    const photoUrl = ('https://backend-sin143.000webhostapp.com/perfilPhotos/default.svg');
+    const photoUrl = ('https://backend-sin143.000webhostapp.com/default.svg');
 
 
     return (

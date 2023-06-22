@@ -1,0 +1,69 @@
+.cardEvent {
+    background-color: rgba(0, 0, 0, 0.636);
+    max-width: 250px;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px #ffffff46;
+}
+
+.cardEvent .cardImgBox {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    background-color: rgba(255, 0, 0, 0.463);
+    position: relative;
+}
+
+.cardEvent .cardImgBox img:nth-child(1) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: green;
+}
+
+.cardEvent .cardImgBox img:nth-child(2) {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+    width: 25px;
+}
+
+.cardEvent .cardTitle {
+    font-size: 27px;
+    text-transform: lowercase;
+    height: 20%;
+    border-bottom: 2px solid #fff;
+    border-top: 2px solid #fff;
+    display: grid;
+    place-items: center;
+    font-size: 15px;
+}
+
+.cardEvent .box {
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    align-items: center;
+}
+
+.cardEvent .box {
+    display: flex;
+}
+
+.cardEvent .box img {
+    width: 25px;
+    cursor: pointer;
+}
+
+.cardEvent .box img:hover {
+    filter:drop-shadow(0px 0px 1px #fff);
+}
+
+.cardEvent .cardImgBox {
+
+}

@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import {getUid} from '../../../Firebase/Authentication';
 import { pegaDadosUser } from '../../../Authentication/User';
 import NewEventButton from '../../NewEventButton/NewEventButton';
+import { pegaEventos } from '../../../Authentication/Evento';
+import CardEvent from '../../CardEvent/CardEvent';
+import  {Cards}  from '../../../Authentication/Cards';
 
 export default function Account() {
 
@@ -13,9 +16,9 @@ export default function Account() {
     const [tipo, setTipo] = useState('');
     const [uid, setUid] = useState('');
     const [id, setId] = useState('');
+    const [eventos, setEventos] = useState([]);
 
     useEffect(()=>{
-        
         const uid = getUid();
         pegaDadosUser(uid)
         .then(data =>{
@@ -25,6 +28,13 @@ export default function Account() {
             setTipo(data[0].user_tipo);
             setUid(data[0].user_uid);
             setId(data[0].user_id);
+
+            Cards(data[0].user_id, 0, response => {
+                const eventosArray = Object.values(response);
+                setEventos(eventosArray);
+              });
+              
+              
         })
 
     }, [])
@@ -52,9 +62,14 @@ export default function Account() {
                         
                 <hr/>
 
-                <div className='events'>
-                    <h3>Seus eventos</h3>
+                <h3>Seus eventos</h3>
 
+                <div className='events'>
+                    {
+                        eventos.map(evento => (
+                            <CardEvent key={evento.evento_id} titulo={evento.evento_titulo} imagem={evento.imagem_url}/>
+                        ))
+                    }   
                 </div>
             </div>
         </BoxPage>
