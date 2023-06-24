@@ -20,9 +20,8 @@ export function signIn(email, senha, successCallback) {
       const user = userCredential.user;
       const token = user.getIdToken();
       document.cookie = `token=${token}; path=/;`;
-      window.location.replace('/home');
         
-        successCallback(true);
+      successCallback(true, user.uid);
       return token;
     })
     .catch((error) => {

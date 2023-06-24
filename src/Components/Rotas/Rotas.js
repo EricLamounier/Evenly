@@ -12,6 +12,7 @@ import Account from "../Pages/Account/Account";
 import EditarConta from '../Pages/EditarConta/EditarConta'
 import { isLoggedIn } from "../../Firebase/Authentication";
 import CriarEvento from "../Pages/CriarEvento/CriarEvento";
+import EditEvent from "../Pages/EditEvent/EditEvent";
 
 export default function Rotas() {
   return (
@@ -45,6 +46,10 @@ export default function Rotas() {
 
         <Route path="/criarEvento" element={<PrivateRoute />}>
           <Route index element={<CriarEvento />} />
+        </Route>
+
+        <Route path="/editarEvento" element={<PrivateRoute />}>
+          <Route index element={<EditEvent />} />
         </Route>
       </Routes>
     </Router> 

@@ -24,8 +24,7 @@ export function User(uid, nome, email, tipoUsuario, opt, sucessCallback) {
 
 export function pegaDadosUser(uid) {
     const url = `https://backend-sin143.000webhostapp.com/Server/Authentication.php`;
-    
-    
+      
     let formData = new FormData();
     formData.append("opt", 1);
     formData.append("uid", uid);
@@ -42,7 +41,6 @@ export function pegaDadosUser(uid) {
     .then(data => {
         
         localStorage.setItem('uid', uid);
-
         return data;
     })
     .catch(error => {

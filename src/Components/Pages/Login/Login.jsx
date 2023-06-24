@@ -8,6 +8,7 @@ import { signIn } from '../../../Firebase/Authentication';
 import { validarLogin } from '../../../Authentication/ValidarCadastro';
 import Modal from '../../Modal/Modal';
 import Loading from '../../Loading/Loading';
+import { pegaDadosUser } from '../../../Authentication/User';
 
 export default function Login(){
 
@@ -31,9 +32,16 @@ export default function Login(){
         //entrar com email e senha
         if (isValid) {
             setLoading(<Loading />);
-            signIn(email, senha, (success) => {
-                if (success) {
-                    window.location.replace('/home');
+            signIn(email, senha, (sucess, uid) => {
+                if (sucess) {
+                    pegaDadosUser(uid)
+                    .then(res => {
+                        localStorage.setItem('id', res[0].user_id);
+                        window.location.replace(`/home?id=${res[0].user_id}`)
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
                 } else {
                     loginError();
                     setLoading('Entrar')

@@ -4,7 +4,7 @@ export function Cards(user_id, opt, sucessCallback) {
 
     let formData = new FormData();
     formData.append("user_id", user_id);
-    formData.append("opt", opt);
+    formData.append("opt", parseInt(opt));
 
     return fetch(url, {
         method: "POST",

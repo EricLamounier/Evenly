@@ -1,44 +1,57 @@
-import './CriarEvento.css';
+import './EditEvent.css';
 import BoxPage from '../../BoxPage/BoxPage';
-import { useState } from 'react';
-import { Evento, enviarImagem } from '../../../Authentication/Evento';
-import { pegaDadosUser } from '../../../Authentication/User';
-import { getUid } from '../../../Firebase/Authentication';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { atualizarEvento, retornaCategoria } from '../../../Authentication/Evento';
 export default function CriarEvento() {
 
     const [titulo, setTitulo] = useState('')
     const [descricao, setDescricao] = useState('');
-    const [data, setData] = useState('00-00-0000');
+    const [data, setData] = useState('2023-03-23');
     const [hora, setHora] = useState('00:00');
     const [preco, setPreco] = useState('');
-    const [categoria, setCategoria] = useState(0);
-    const [images, setImages] = useState([]);
+    const [categoria, setCategoria] = useState('');
     const [local, setLocal] = useState('');
+    const [catId, setCadId] = useState('');
+
+    const location = useLocation();
+
+    // Obtém o valor do parâmetro "data" da URL
+    const queryParams = new URLSearchParams(location.search);
+    const dataParam = queryParams.get('data');
+
+    // Converte a string de volta para um objeto
+    const event = JSON.parse(decodeURIComponent(dataParam));
+
+    useEffect(()=>{
+
+        setTitulo(event.evento_titulo);
+        setDescricao(event.evento_descricao);
+        setData(event.evento_data);
+        setHora(event.evento_hora);
+        setLocal(event.evento_local);
+        setPreco(event.evento_preco);
+        
+        setCategoria(event.evento_categoria)
+
+        setCadId(retornaCategoria(event.evento_categoria));
+
+    },[])
 
     const handleSubmit = () =>{
-        const uid = getUid();
-        pegaDadosUser(uid)
-        .then(response => {
-            Evento(response[0].user_id, titulo, descricao, categoria, data, hora, preco, local, 0,
-                (el)=>{
-                    handleImages(el);
-                });
-                alert('cadastrado com sucesso');
+        atualizarEvento(event.evento_id, titulo, descricao, categoria, data, hora, preco, local, 3, response =>{
+            alert('foi')
         })
     }
 
-    const handleImages = (event_id) => {
-        if(images.length > 0){
-            Object.values(images).forEach((img) => {
-                //envia cada imagem para o banco
-                enviarImagem(img, event_id, 0);
-            });
-        }
-    } 
+    const teste = () => {
+        console.log(categoria);
+    }
 
     return (
-        <BoxPage>
-            <h2>Criar novo evento</h2>
+        <BoxPage className='updateEvent'>
+            <button onClick={()=>{teste()}}>teste</button>
+            <h2>Atualizar evento</h2>
 
             <div className='inputBox'>
                 <label>Titulo do evento:</label>
@@ -66,6 +79,7 @@ export default function CriarEvento() {
                 <label>Data do evento:</label>
                 <input 
                     type='date' 
+                    value={data}
                     onChange={(e)=>{setData(e.target.value)}}
                     required
                 />
@@ -86,8 +100,8 @@ export default function CriarEvento() {
                 <label>Categoria</label>
                 <select 
                     name="categoria" 
-                    value={categoria}
-                    onChange={(e)=>{setCategoria(e.target.value)}}
+                    value={catId}
+                    onChange={(e)=>{setCadId(e.target.value)}}
                 >
                     <option value='0'>Festa</option>
                     <option value='1'>Bar</option>
@@ -120,18 +134,7 @@ export default function CriarEvento() {
                     required
                 />
             </div>
-
-            <div className='inputBox'>
-                <label>Imagens do evento:</label>
-                <input 
-                    type='file'
-                    multiple
-                    accept="image/*"
-                    onChange={(e)=>{setImages(e.target.files)}}
-                    required
-                />
-            </div>
-            <button onClick={handleSubmit}>Criar evento</button>
+            <button onClick={handleSubmit}>Atualizar evento</button>
         </BoxPage>
     );
 }

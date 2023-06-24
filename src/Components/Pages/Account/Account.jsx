@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 import {getUid} from '../../../Firebase/Authentication';
 import { pegaDadosUser } from '../../../Authentication/User';
 import NewEventButton from '../../NewEventButton/NewEventButton';
-import { pegaEventos } from '../../../Authentication/Evento';
 import CardEvent from '../../CardEvent/CardEvent';
 import  {Cards}  from '../../../Authentication/Cards';
+import EventDetail from '../EventDetail/EventDetail';
+import { excluirEvento } from '../../../Authentication/Evento';
 
 export default function Account() {
 
@@ -17,6 +18,10 @@ export default function Account() {
     const [uid, setUid] = useState('');
     const [id, setId] = useState('');
     const [eventos, setEventos] = useState([]);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState(null);
+  
 
     useEffect(()=>{
         const uid = getUid();
@@ -32,12 +37,33 @@ export default function Account() {
             Cards(data[0].user_id, 0, response => {
                 const eventosArray = Object.values(response);
                 setEventos(eventosArray);
-              });
-              
-              
+            });
         })
 
     }, [])
+
+    const openModal = (evento) => {
+        setSelectedEvent(evento);
+        setIsModalOpen(true);
+      };
+    
+      const closeModal = () => {
+        setIsModalOpen(false);
+      };
+
+      const handleDeleteEvent = (evento_id) => {
+        excluirEvento(evento_id, 2, (response) =>{
+          if (response === true) {
+            alert('Excluído com sucesso');
+            
+            // Atualize a lista de eventos removendo o evento excluído
+            setEventos(eventos.filter(evento => evento.evento_id !== evento_id));
+          } else {
+            alert('Falha na exclusão');
+          }
+        });
+      };
+      
 
     return (
         <BoxPage>
@@ -52,7 +78,7 @@ export default function Account() {
                         }
                     </p>
 
-                    <Link to={`/editarConta?email=${email}&nome=${name}&tipoUsuario=${tipo}&id=${id}&uid=${uid}`}>
+                    <Link to={`/editarConta?&email=${email}&nome=${name}&tipoUsuario=${tipo}&id=${id}&uid=${uid}`}>
                         <button>Editar conta</button>
                     </Link>
 
@@ -67,10 +93,21 @@ export default function Account() {
                 <div className='events'>
                     {
                         eventos.map(evento => (
-                            <CardEvent key={evento.evento_id} titulo={evento.evento_titulo} imagem={evento.imagem_url}/>
+                            <CardEvent
+                                key={evento.evento_id}
+                                data={evento}
+                                titulo={evento.evento_titulo}
+                                imagem={evento.imagem_url}
+                                onOpenModal={() => openModal(evento)}
+                                onDeleteEvent={() => handleDeleteEvent(evento.evento_id)} // Adicione essa linha
+                                />
+
                         ))
                     }   
                 </div>
+                {isModalOpen && (
+                    <EventDetail event={selectedEvent} onCloseModal={closeModal} />
+                )}
             </div>
         </BoxPage>
     );
