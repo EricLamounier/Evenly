@@ -69,7 +69,12 @@ export default function CardEvent(props) {
                     />
                     <span>{countLike}</span>
                 </div>
-                <img src={comment} className='cardComments' alt='icon comment' />
+                <img 
+                    src={comment} 
+                    className='cardComments' 
+                    alt='icon comment'
+                    onClick={() => props.onOpenModal(props.data)}
+                />
             </div>
         </div>
     );

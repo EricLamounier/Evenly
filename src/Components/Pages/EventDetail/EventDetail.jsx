@@ -4,6 +4,7 @@ import send from '../../../Images/icons/send.svg';
 import CommentBox from '../../CommentBox/CommentBox';
 import { useState, useEffect } from 'react';
 import { comentar } from '../../../Authentication/Evento'
+import { v4 as uuidv4 } from 'uuid';
 
 export default function EventDetail(props) {
   const event = props.event;
@@ -13,7 +14,7 @@ export default function EventDetail(props) {
 
   useEffect(()=>{
     comentar(5, event.evento_id, -1, '', (response)=>{
-      //console.log( response)
+      
       setData(response)
     })
   }, [])
@@ -21,17 +22,20 @@ export default function EventDetail(props) {
   const sendComment = () => {
     const currentId = localStorage.getItem('id');
     const eventId = event.evento_id;
-
-    comentar(4, eventId, currentId, comment, (response)=>{
-      if(response.response){
-        const newComment = {
-          user_name: 'Nome do Usuário',
-          evento_comentario: comment
-        };
+  
+    const newComment = {
+      user_name: 'Nome do Usuário',
+      evento_comentario: comment
+    };
+  
+    comentar(4, eventId, currentId, comment, (response) => {
+      if (response.response) {
         setData((prevData) => [...prevData, newComment]);
+        setComment('');
       }
-    })
-  }
+    });
+  };
+  
 
   return (
     <div className='eventDetail'>
@@ -64,6 +68,7 @@ export default function EventDetail(props) {
           {
             data.map(ev => (
               <CommentBox
+                key={uuidv4()}
                 user={ev.user_name}
                 comment={ev.evento_comentario}
               />
@@ -75,6 +80,7 @@ export default function EventDetail(props) {
             type='text' 
             className='comment' 
             placeholder='Comente aqui...'
+            value={comment}
             onChange={(e)=>setComment(e.target.value)}
           />
           <div className='iconBox'>
