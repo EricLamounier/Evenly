@@ -3,7 +3,7 @@ import './Footer.css';
 export default function Footer() {
     return (
         <footer className='footer'>
-            <p>&copy; 2023 - Coded with 💙 by
+            <p>&copy; 2023 - Coded with <span title="love">💙</span> by
                 &nbsp;
                 <a href="https://github.com/EricLamounier" rel="noreferrer" target='_blank' title="Eric's GitHub" >Eric Lamounier</a>,
                 &nbsp;

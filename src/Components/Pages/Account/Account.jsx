@@ -39,7 +39,6 @@ export default function Account() {
                 setEventos(eventosArray);
             });
         })
-
     }, [])
 
     const openModal = (evento) => {

@@ -213,7 +213,32 @@ export function curtir(opt, event_id, user_id, sucessCallback) {
     })
     .then(response => response.json())
     .then(data =>{
-        sucessCallback(data.response);
+        sucessCallback(data);
+    })
+    .catch((error) => {
+        console.error(error);
+    // lidar com o erro
+    });
+    
+}
+
+export function comentar(opt, event_id, user_id, comentario, sucessCallback) {
+    //type 0 - like type = 1 unlike
+    const url = "https://backend-sin143.000webhostapp.com/Server/Review.php";
+    
+    let formData = new FormData();
+    formData.append("opt", opt);
+    formData.append("evento_id", event_id);
+    formData.append("user_id", user_id);
+    formData.append("comentario", comentario);
+    
+    return fetch(url, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data =>{
+        sucessCallback(data);
     })
     .catch((error) => {
         console.error(error);

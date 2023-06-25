@@ -40,8 +40,6 @@ export default function Home() {
 
   return (
     <BoxPage>
-      {CurrentId}
-      <button onClick={() =>{teste()}}>teste</button>
       <div className='main'>
         Lista de eventos
         <div className='events'>

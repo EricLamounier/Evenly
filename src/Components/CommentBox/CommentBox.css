@@ -1,0 +1,33 @@
+.commentBox {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.commentBox .userImg {
+    background-color: rgb(207, 207, 207);
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    padding: 5px;
+    justify-content: center;
+}
+
+.commentBox .personInfo {
+    background-color: rgb(236, 236, 236);
+    width: calc(100% - 40px);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.commentBox .userName {
+    font-size: 11px;
+    font-style: italic;
+    color: rgb(65, 65, 65)
+}
+
+.commentBox .commentText {
+    font-size: 13px;
+    color: #000
+}

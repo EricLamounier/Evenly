@@ -13,31 +13,42 @@ export default function CardEvent(props) {
 
     const [isLiked, setIsLiked] = useState(false);
     const [img, setImg] = useState(like);
-    const [countLike, setCountLike] = useState(2);
+    const [countLike, setCountLike] = useState('');
     const [currentId, setCurrentId] = useState('');
 
     useEffect(() => {
 
         setCurrentId(localStorage.getItem('id'));
         
-        isLiked === true ? setImg(liked) : setImg(like);
-        setCountLike(props.data.evento_curtidas);
+        //pega a quantidade de curtidas de cada evento
+        curtir(2, props.data.evento_id, -1, (response)=>{
+            setCountLike(response.curtidas);
+        });
+
+        //verifica quais eventos o usuario atual ja curtiu
+        curtir(3, props.data.evento_id, localStorage.getItem('id'), (response)=>{
+            setIsLiked(response.isLiked);
+            response.isLiked === 1 ? setImg(liked) : setImg(like);
+        });
+
     }, []);
     
     const handleLike = () => {
-        console.log(props.data);
 
-        console.log(props.data.currentUser);
         setIsLiked(!isLiked);
 
         if(!isLiked){ //curtiu
             curtir(0, props.data.evento_id, currentId, (response) => {
-                setImg(liked);
+                //liked
             });
+            setCountLike(countLike+1);
+            setImg(liked)
         }else{ //descurtiu
             curtir(1, props.data.evento_id, currentId, (response) => {
-                setImg(like);
+                //unliked
             });
+            setCountLike(countLike-1);
+            setImg(like);
         }
     }
 
@@ -49,7 +60,7 @@ export default function CardEvent(props) {
             </div>
             <h3 className='cardTitle'>{props.titulo}</h3>
             <div className='box'>
-                <div>
+                <div className='likeBox'>
                     <img 
                         src={img} 
                         className='cardLike' 

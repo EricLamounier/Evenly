@@ -65,8 +65,13 @@
     filter:drop-shadow(0px 0px 1px #fff);
 }
 
-.cardLike::after {
-    position: absolute !important;
-    content: 'oi' !important;
-    right: 0 !important;
+.likeBox {
+    display: flex;
+    gap: 5px
+}
+
+.likeBox span {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
 }
