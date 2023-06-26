@@ -3,3 +3,9 @@
     flex-direction: column;
     flex: 1;
 }
+
+.boxPage hr {
+    width: 105%;
+    align-self: center;
+    margin: 10px 0
+}

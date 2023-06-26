@@ -52,14 +52,14 @@ export default function Cadastro() {
 
         setLoading(<Loading />);
         
-
         signUp(email, senha)
         .then((uid) => {
           User(uid, nome, email, tipoUsuario, 0, (response)=>{
-            if(response){
-              console.log('sucess');
+              console.log(response);
+              localStorage.setItem('user_name', nome);
+              localStorage.setItem('id', response)
               window.location.replace("/home");
-            }
+            
           })
         })
         .catch((error) => {

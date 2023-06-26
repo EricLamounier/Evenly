@@ -5,17 +5,21 @@ import CommentBox from '../../CommentBox/CommentBox';
 import { useState, useEffect } from 'react';
 import { comentar } from '../../../Authentication/Evento'
 import { v4 as uuidv4 } from 'uuid';
+import Loading from '../../Loading/Loading'
 
 export default function EventDetail(props) {
   const event = props.event;
   const url = 'https://backend-sin143.000webhostapp.com/EventosImagens/';
   const [comment, setComment] = useState('');
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState('');
 
   useEffect(()=>{
+    setLoading(true)
     comentar(5, event.evento_id, -1, '', (response)=>{
-      
-      setData(response)
+     
+      setData(response);
+      setLoading(false);
     })
   }, [])
 
@@ -24,19 +28,19 @@ export default function EventDetail(props) {
     const eventId = event.evento_id;
   
     const newComment = {
-      user_name: 'Nome do Usuário',
+      user_name: localStorage.getItem('user_name'),
       evento_comentario: comment
     };
   
     comentar(4, eventId, currentId, comment, (response) => {
       if (response.response) {
+        
         setData((prevData) => [...prevData, newComment]);
         setComment('');
       }
     });
   };
   
-
   return (
     <div className='eventDetail'>
       <img className='eventImg' src={url + (event.imagem_url === null ? 'evenly_logo.png' : event.imagem_url) } alt='teste' />
@@ -66,6 +70,7 @@ export default function EventDetail(props) {
         <div className='eventComments'>
         <div className='commentBoxContainer'>
           {
+            loading ? <Loading /> :
             data.map(ev => (
               <CommentBox
                 key={uuidv4()}

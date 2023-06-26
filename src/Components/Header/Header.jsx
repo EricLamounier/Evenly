@@ -2,14 +2,14 @@ import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoHeader from '../../Images/logo/evenly_row.png'
 import AccountButton from '../AccountButton/AccountButton';
-import { useState } from 'react';
+import NewEventButton from '../NewEventButton/NewEventButton';
+import { disconnect } from '../../Firebase/Authentication';
 
 export default function Header(props) {
 
     const location = useLocation();
 
     const photoUrl = ('https://backend-sin143.000webhostapp.com/default.svg');
-
 
     return (
         <header className="header">
@@ -20,9 +20,18 @@ export default function Header(props) {
                 {
                 props.el === 1 ? (
                 <>
-                    <Link to="/account">
-                        <AccountButton img={photoUrl} />
-                    </Link>
+                    <div className='headerMenu'>
+                        <NewEventButton />
+                        <Link to='/account'>
+                            <AccountButton img={photoUrl} />
+                        </Link>
+                        <div 
+                            className='sair'
+                            onClick={()=>disconnect()}
+                        >
+                            Sair
+                        </div>
+                    </div>
                 </> 
                  ): 
                  (

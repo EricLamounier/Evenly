@@ -36,8 +36,10 @@ export default function Login(){
                 if (sucess) {
                     pegaDadosUser(uid)
                     .then(res => {
+                        localStorage.setItem('uid', uid);
                         localStorage.setItem('id', res[0].user_id);
-                        window.location.replace(`/home?id=${res[0].user_id}`)
+                        localStorage.setItem('user_name', res[0].user_name);
+                        window.location.replace(`/home`)
                     })
                     .catch(error => {
                         console.error(error);

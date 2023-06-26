@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged, sendPasswordResetEmail, updateEmail } from "firebase/auth";
+import { getAuth, onAuthStateChanged, sendPasswordResetEmail, updateEmail, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -98,5 +98,15 @@ export function resetPassword(email){
 
       console.log('error ' + errorCode + ': ' + errorMessage)
       
+  });
+}
+
+export function disconnect(){
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    window.location.replace('/');
+    localStorage.clear();
+  }).catch((error) => {
+    // An error happened.
   });
 }

@@ -14,6 +14,7 @@ export default function CardEvent(props) {
     const [isLiked, setIsLiked] = useState(false);
     const [img, setImg] = useState(like);
     const [countLike, setCountLike] = useState('');
+    const [countComment, setCountComment] = useState('');
     const [currentId, setCurrentId] = useState('');
 
     useEffect(() => {
@@ -23,6 +24,7 @@ export default function CardEvent(props) {
         //pega a quantidade de curtidas de cada evento
         curtir(2, props.data.evento_id, -1, (response)=>{
             setCountLike(response.curtidas);
+            setCountComment(response.comentarios);
         });
 
         //verifica quais eventos o usuario atual ja curtiu
@@ -30,8 +32,7 @@ export default function CardEvent(props) {
             setIsLiked(response.isLiked);
             response.isLiked === 1 ? setImg(liked) : setImg(like);
         });
-
-    }, []);
+    }, [props.data.evento_id]);
     
     const handleLike = () => {
 
@@ -54,9 +55,14 @@ export default function CardEvent(props) {
 
     return (
         <div className="cardEvent">
+            <p className='username'>{localStorage.getItem('user_name')}</p>
             <div className='cardImgBox'>
                 <img src={url + (props.imagem === null ? 'evenly_logo.png' : props.imagem)} className='cardImg' alt="loogo"/>
-                <EventoInfo data={props.data} onOpenModal={props.onOpenModal} onDeleteEvent={props.onDeleteEvent} />
+                <EventoInfo 
+                    data={props.data} 
+                    onOpenModal={props.onOpenModal} 
+                    onDeleteEvent={props.onDeleteEvent} 
+                />
             </div>
             <h3 className='cardTitle'>{props.titulo}</h3>
             <div className='box'>
@@ -69,12 +75,15 @@ export default function CardEvent(props) {
                     />
                     <span>{countLike}</span>
                 </div>
-                <img 
-                    src={comment} 
-                    className='cardComments' 
-                    alt='icon comment'
-                    onClick={() => props.onOpenModal(props.data)}
-                />
+                <div className='likeBox'>
+                    <span>{countComment}</span>
+                    <img 
+                        src={comment} 
+                        className='cardComments' 
+                        alt='icon comment'
+                        onClick={() => props.onOpenModal(props.data)}
+                    />
+                </div>
             </div>
         </div>
     );

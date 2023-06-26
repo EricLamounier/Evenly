@@ -41,3 +41,23 @@
 .header .links {
     display: flex;
 }
+
+.header .headerMenu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header .sair {
+    cursor: pointer;
+    border: 2px solid #fff;
+    padding: 5px 20px;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.header .sair:hover {
+    background-color: #fff;
+    color: rgb(0, 0, 105)
+
+}

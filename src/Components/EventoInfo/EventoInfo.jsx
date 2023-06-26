@@ -12,14 +12,13 @@ export default function EventoInfo(props) {
   const handleDelete = (evento_id) => {
     excluirEvento(evento_id, 2, (response) => {
       if (response === true) {
-        props.onDeleteEvent(); // Chame a função de atualização fornecida como prop
+        props.onDeleteEvent();
       } else {
         alert('Falha na exclusão');
       }
     });
   };
   
-
   return (
     <div className='eventoInfo'>
       <img

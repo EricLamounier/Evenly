@@ -1,26 +1,30 @@
 import './Home.css';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import BoxPage from '../../BoxPage/BoxPage';
 import NewEventButton from '../../NewEventButton/NewEventButton'
 import { Cards } from '../../../Authentication/Cards';
 import CardEvent from '../../CardEvent/CardEvent';
 import EventDetail from '../EventDetail/EventDetail';
+import Loading from '../../Loading/Loading';
 
 export default function Home() {
   const [eventos, setEventos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [CurrentId, setId] = useState('');
-
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
 
     setId(localStorage.getItem('id'));
+
+    setLoading(<Loading/>);
 
     //pega os dados do usuario autenticado
     Cards(CurrentId, 1, (response) => {
       const eventosArray = Object.values(response);
       setEventos(eventosArray);
+      setLoading('');
     });
   }, []);
 
@@ -34,26 +38,25 @@ export default function Home() {
     setIsModalOpen(false);
   };
 
-  const teste = () => {
-    console.log(eventos);
-  }
-
   return (
     <BoxPage>
       <div className='main'>
         Lista de eventos
         <div className='events'>
-          {eventos.map((evento) => (
-            <CardEvent
-              key={evento.evento_id}
-              data={evento}
-              titulo={evento.evento_titulo}
-              imagem={evento.imagem_url}
-              onOpenModal={() => openModal(evento)}
-            />
-          ))}
+          { loading ? 
+            <Loading/>
+          :
+            eventos.map((evento) => (
+              <CardEvent
+                key={evento.evento_id}
+                data={evento}
+                titulo={evento.evento_titulo}
+                imagem={evento.imagem_url}
+                onOpenModal={() => openModal(evento)}
+              />
+            ))
+          }
         </div>
-        <NewEventButton />
         {isModalOpen && (
           <EventDetail event={selectedEvent} onCloseModal={closeModal} />
         )}

@@ -6,9 +6,10 @@ import {getUid} from '../../../Firebase/Authentication';
 import { pegaDadosUser } from '../../../Authentication/User';
 import NewEventButton from '../../NewEventButton/NewEventButton';
 import CardEvent from '../../CardEvent/CardEvent';
-import  {Cards}  from '../../../Authentication/Cards';
+import {Cards}  from '../../../Authentication/Cards';
 import EventDetail from '../EventDetail/EventDetail';
 import { excluirEvento } from '../../../Authentication/Evento';
+import Loading from '../../Loading/Loading';
 
 export default function Account() {
 
@@ -21,7 +22,7 @@ export default function Account() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
-  
+    const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
         const uid = getUid();
@@ -34,9 +35,12 @@ export default function Account() {
             setUid(data[0].user_uid);
             setId(data[0].user_id);
 
+            setLoading(true);
+
             Cards(data[0].user_id, 0, response => {
                 const eventosArray = Object.values(response);
                 setEventos(eventosArray);
+                setLoading(false)
             });
         })
     }, [])
@@ -62,7 +66,6 @@ export default function Account() {
           }
         });
       };
-      
 
     return (
         <BoxPage>
@@ -80,17 +83,12 @@ export default function Account() {
                     <Link to={`/editarConta?&email=${email}&nome=${name}&tipoUsuario=${tipo}&id=${id}&uid=${uid}`}>
                         <button>Editar conta</button>
                     </Link>
-
-                    <NewEventButton />
-
                 </div>
-                        
                 <hr/>
-
                 <h3>Seus eventos</h3>
-
                 <div className='events'>
                     {
+                        loading ? <Loading /> :
                         eventos.map(evento => (
                             <CardEvent
                                 key={evento.evento_id}
@@ -99,13 +97,15 @@ export default function Account() {
                                 imagem={evento.imagem_url}
                                 onOpenModal={() => openModal(evento)}
                                 onDeleteEvent={() => handleDeleteEvent(evento.evento_id)} // Adicione essa linha
-                                />
-
+                            />
                         ))
                     }   
                 </div>
                 {isModalOpen && (
-                    <EventDetail event={selectedEvent} onCloseModal={closeModal} />
+                    <EventDetail 
+                        event={selectedEvent} 
+                        onCloseModal={closeModal}   
+                    />
                 )}
             </div>
         </BoxPage>

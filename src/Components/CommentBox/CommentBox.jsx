@@ -1,6 +1,5 @@
 import './CommentBox.css';
-import person from '../../Images/icons/plus.svg';
-import { useState, useEffect } from 'react';
+import person from '../../Images/icons/person.svg';
 
 export default function CommentBox(props){
 
