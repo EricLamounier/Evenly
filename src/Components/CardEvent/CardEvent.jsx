@@ -8,83 +8,81 @@ import { useState, useEffect } from 'react';
 import { curtir } from '../../Authentication/Evento';
 
 export default function CardEvent(props) {
+  const url = 'https://backend-sin143.000webhostapp.com/EventosImagens/';
 
-    const url = 'https://backend-sin143.000webhostapp.com/EventosImagens/';
+  const [isLiked, setIsLiked] = useState(false);
+  const [img, setImg] = useState(like);
+  const [countLike, setCountLike] = useState('');
+  const [countComment, setCountComment] = useState('');
 
-    const [isLiked, setIsLiked] = useState(false);
-    const [img, setImg] = useState(like);
-    const [countLike, setCountLike] = useState('');
-    const [countComment, setCountComment] = useState('');
-    const [currentId, setCurrentId] = useState('');
+  useEffect(() => {
+    //pega a quantidade de curtidas e comentários de cada evento
+    curtir(2, props.data.evento_id, -1, (response) => {
+      setCountLike(response.curtidas);
+      setCountComment(response.comentarios);
+    });
 
-    useEffect(() => {
+    //verifica se o usuário atual já curtiu o evento
+    curtir(3, props.data.evento_id, localStorage.getItem('id'), (response) => {
+      setIsLiked(response.isLiked);
+      response.isLiked === 1 ? setImg(liked) : setImg(like);
+    });
+  }, [props.data.evento_id]);
 
-        setCurrentId(localStorage.getItem('id'));
-        
-        //pega a quantidade de curtidas de cada evento
-        curtir(2, props.data.evento_id, -1, (response)=>{
-            setCountLike(response.curtidas);
-            setCountComment(response.comentarios);
-        });
+  const handleLike = () => {
+    setIsLiked(!isLiked);
 
-        //verifica quais eventos o usuario atual ja curtiu
-        curtir(3, props.data.evento_id, localStorage.getItem('id'), (response)=>{
-            setIsLiked(response.isLiked);
-            response.isLiked === 1 ? setImg(liked) : setImg(like);
-        });
-    }, [props.data.evento_id]);
-    
-    const handleLike = () => {
-
-        setIsLiked(!isLiked);
-
-        if(!isLiked){ //curtiu
-            curtir(0, props.data.evento_id, currentId, (response) => {
-                //liked
-            });
-            setCountLike(countLike+1);
-            setImg(liked)
-        }else{ //descurtiu
-            curtir(1, props.data.evento_id, currentId, (response) => {
-                //unliked
-            });
-            setCountLike(countLike-1);
-            setImg(like);
-        }
+    if (!isLiked) {
+      //curtiu
+      curtir(0, props.data.evento_id, localStorage.getItem('id'), (response) => {
+        //liked
+      });
+      setCountLike(countLike + 1);
+      setImg(liked);
+    } else {
+      //descurtiu
+      curtir(1, props.data.evento_id, localStorage.getItem('id'), (response) => {
+        //unliked
+      });
+      setCountLike(countLike - 1);
+      setImg(like);
     }
+  };
 
-    return (
-        <div className="cardEvent">
-            <p className='username'>{localStorage.getItem('user_name')}</p>
-            <div className='cardImgBox'>
-                <img src={url + (props.imagem === null ? 'evenly_logo.png' : props.imagem)} className='cardImg' alt="loogo"/>
-                <EventoInfo 
-                    data={props.data} 
-                    onOpenModal={props.onOpenModal} 
-                    onDeleteEvent={props.onDeleteEvent} 
-                />
-            </div>
-            <h3 className='cardTitle'>{props.titulo}</h3>
-            <div className='box'>
-                <div className='likeBox'>
-                    <img 
-                        src={img} 
-                        className='cardLike' 
-                        alt='icon like'
-                        onClick={()=>{handleLike()}}
-                    />
-                    <span>{countLike}</span>
-                </div>
-                <div className='likeBox'>
-                    <span>{countComment}</span>
-                    <img 
-                        src={comment} 
-                        className='cardComments' 
-                        alt='icon comment'
-                        onClick={() => props.onOpenModal(props.data)}
-                    />
-                </div>
-            </div>
+  return (
+    <div className="cardEvent">
+      <p className="username">{localStorage.getItem('user_name')}</p>
+      <div className="cardImgBox">
+        <img
+          src={url + (props.imagem === null ? 'evenly_logo.png' : props.imagem)}
+          className="cardImg"
+          alt="loogo"
+        />
+        <EventoInfo data={props.data} onOpenModal={props.onOpenModal} onDeleteEvent={props.onDeleteEvent} />
+      </div>
+      <h3 className="cardTitle">{props.titulo}</h3>
+      <div className="box">
+        <div className="likeBox">
+          <img
+            src={img}
+            className="cardLike"
+            alt="icon like"
+            onClick={() => {
+              handleLike();
+            }}
+          />
+          <span>{countLike}</span>
         </div>
-    );
+        <div className="likeBox">
+          <span>{countComment}</span>
+          <img
+            src={comment}
+            className="cardComments"
+            alt="icon comment"
+            onClick={() => props.onOpenModal(props.data)}
+          />
+        </div>
+      </div>
+    </div>
+  );
 }
