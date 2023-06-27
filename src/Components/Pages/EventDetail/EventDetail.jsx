@@ -13,7 +13,6 @@ export default function EventDetail(props) {
   const [comment, setComment] = useState('');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState('');
-  const [countComment, setCountComment] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -36,18 +35,20 @@ export default function EventDetail(props) {
       if (response.response) {
         setData((prevData) => [...prevData, newComment]);
         setComment('');
-        setCountComment((prevCount) => prevCount + 1);
       }
     });
   };
 
   return (
     <div className="eventDetail">
-      <img
-        className="eventImg"
-        src={url + (event.imagem_url === null ? 'evenly_logo.png' : event.imagem_url)}
-        alt="teste"
-      />
+      <div className='leftContent'>
+        <img
+          className="eventImg"
+          src={url + (event.imagem_url === null ? 'evenly_logo.png' : event.imagem_url)}
+          alt="teste"
+        />
+        <button>Se inscrever R$ {event.evento_preco}</button>
+      </div>
       <div className="eventContent">
         <div className="eventInfo">
           <div className="closeBox">

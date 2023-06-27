@@ -14,8 +14,11 @@ export default function CardEvent(props) {
   const [img, setImg] = useState(like);
   const [countLike, setCountLike] = useState('');
   const [countComment, setCountComment] = useState('');
+  const [userCard, setUserCard] = useState('');
 
   useEffect(() => {
+
+    setUserCard(props.data.user_name);
     //pega a quantidade de curtidas e comentários de cada evento
     curtir(2, props.data.evento_id, -1, (response) => {
       setCountLike(response.curtidas);
@@ -51,7 +54,7 @@ export default function CardEvent(props) {
 
   return (
     <div className="cardEvent">
-      <p className="username">{localStorage.getItem('user_name')}</p>
+      <p className="username">{userCard}</p>
       <div className="cardImgBox">
         <img
           src={url + (props.imagem === null ? 'evenly_logo.png' : props.imagem)}
