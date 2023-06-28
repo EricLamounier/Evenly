@@ -1,6 +1,6 @@
 .cardEvent {
     background-color: rgba(0, 0, 0, 0.636);
-    max-width: 250px;
+    width: 240px;
     min-height: 300px;
     max-height: 300px;
     display: flex;

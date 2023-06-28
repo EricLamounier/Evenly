@@ -84,20 +84,20 @@ export function changeEmail(newEmail) {
   });
 }
 
-export function resetPassword(email){
+export function resetPassword(email, successCallback){
 
   sendPasswordResetEmail(auth, email)
   .then(() => {
       // Password reset email sent!
       
-      alert('email sent to ' + email)
+      successCallback(1);
   })
   .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
 
       console.log('error ' + errorCode + ': ' + errorMessage)
-      
+      successCallback(0)
   });
 }
 

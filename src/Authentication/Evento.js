@@ -1,7 +1,9 @@
 export function Evento(id, titulo, descricao, categoria, data, hora, preco, local, opt, sucessCallback) {
     const url = "https://backend-sin143.000webhostapp.com/Server/Event.php/";
 
+
     hora += ':00';
+    preco = preco.replace(',', '.');
     
     let formData = new FormData();
     formData.append("opt", parseInt(opt));

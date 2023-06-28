@@ -10,8 +10,6 @@
     border: 2px solid transparent;
     border-radius: 5px;
     transition: 0.3s ease;
-    background-color: rgb(172, 0, 0);
-    border-color: rgb(105, 0, 0);
 }
 
 .authModal > p {
@@ -23,6 +21,14 @@
 .authModal.error {
     background-color: rgb(172, 0, 0);
     border-color: rgb(105, 0, 0);
+    right: 0;
+    animation: 0.2s showModal linear;
+    animation-fill-mode: forwards;
+}
+
+.authModal.sucess {
+    background-color: rgb(81, 169, 52);
+    border-color: rgb(46, 111, 35);
     right: 0;
     animation: 0.2s showModal linear;
     animation-fill-mode: forwards;

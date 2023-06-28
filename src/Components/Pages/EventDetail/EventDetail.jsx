@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { comentar } from '../../../Authentication/Evento';
 import { v4 as uuidv4 } from 'uuid';
 import Loading from '../../Loading/Loading';
+import Modal from '../../Modal/Modal';
 
 export default function EventDetail(props) {
   const event = props.event;
@@ -13,8 +14,13 @@ export default function EventDetail(props) {
   const [comment, setComment] = useState('');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState('');
+  const [modal, setModal] = useState(false);
+  const [fadeModal, setFadeModal] = useState('');
+  const [inscriptionStatus, setInscriptionStatus] = useState(false);
+  const [buttonText, setButtonText] = useState('');
 
   useEffect(() => {
+    getInscription();
     setLoading(true);
     comentar(5, event.evento_id, -1, '', (response) => {
       setData(response);
@@ -39,15 +45,56 @@ export default function EventDetail(props) {
     });
   };
 
+  const sendInscription = () => {
+    const eventId = event.evento_id;
+    const currentId = localStorage.getItem('id');
+
+    if (inscriptionStatus) {
+      // Usuário já está inscrito, exibir alerta ou mensagem de erro
+      alert('Você já está inscrito neste evento.');
+      return;
+    }
+
+    comentar(6, eventId, currentId, '', (response) => {
+      setButtonText('Inscrito!');
+      setInscriptionStatus(true);
+      chamaModal();
+    });
+  };
+
+  function chamaModal() {
+    setModal(true);
+    setTimeout(() => {
+      setFadeModal('hide');
+      setTimeout(() => {
+        setFadeModal('');
+        setModal(false);
+      }, 1000);
+    }, 3000);
+  }
+
+  function getInscription() {
+    const eventId = event.evento_id;
+    const currentId = localStorage.getItem('id');
+
+    comentar(7, eventId, currentId, '', (response) => {
+      setInscriptionStatus(response.inscription);
+      setButtonText(response.inscription ? 'Inscrito!' : `Se inscrever R$ ${event.evento_preco}`);
+  
+    });
+  }
+
   return (
     <div className="eventDetail">
-      <div className='leftContent'>
+      <div className="leftContent">
         <img
           className="eventImg"
           src={url + (event.imagem_url === null ? 'evenly_logo.png' : event.imagem_url)}
           alt="teste"
         />
-        <button>Se inscrever R$ {event.evento_preco}</button>
+        <button className={`inscrever ${inscriptionStatus ? 'checked' : ''}`} onClick={sendInscription} disabled={inscriptionStatus}>
+          {buttonText}
+        </button>
       </div>
       <div className="eventContent">
         <div className="eventInfo">
@@ -102,6 +149,7 @@ export default function EventDetail(props) {
           </div>
         </div>
       </div>
+      {modal && <Modal className={`sucess ${fadeModal}`} message="Inscrição confirmada!" />}
     </div>
   );
 }

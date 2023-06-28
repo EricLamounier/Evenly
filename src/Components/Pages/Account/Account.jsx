@@ -9,6 +9,7 @@ import { Cards } from '../../../Authentication/Cards';
 import EventDetail from '../EventDetail/EventDetail';
 import { excluirEvento } from '../../../Authentication/Evento';
 import Loading from '../../Loading/Loading';
+import Modal from '../../Modal/Modal';
 
 export default function Account() {
   const [name, setName] = useState('');
@@ -21,6 +22,9 @@ export default function Account() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
+  const [fadeModal, setFadeModal] = useState('');
+
 
   useEffect(() => {
     const uid = getUid();
@@ -53,7 +57,7 @@ export default function Account() {
   const handleDeleteEvent = (evento_id) => {
     excluirEvento(evento_id, 2, (response) => {
       if (response === true) {
-        alert('Excluído com sucesso');
+        deleteSucess();
 
         // Atualize a lista de eventos removendo o evento excluído
         setEventos(eventos.filter((evento) => evento.evento_id !== evento_id));
@@ -62,6 +66,18 @@ export default function Account() {
       }
     });
   };
+
+  function deleteSucess(){
+    setModal(true);
+    setTimeout(() => {
+        setFadeModal('hide')
+        setTimeout(() => {
+            setFadeModal('')
+            setModal(false);
+        }, 1000)
+
+    }, 3000);
+}
 
   return (
     <BoxPage>
@@ -109,6 +125,11 @@ export default function Account() {
           <EventDetail event={selectedEvent} onCloseModal={closeModal} />
         )}
       </div>
+      {modal && (
+       <Modal 
+        className={`sucess ${fadeModal}`} 
+        message="Evento excluído com sucesso!" />
+      )}
     </BoxPage>
   );
 }

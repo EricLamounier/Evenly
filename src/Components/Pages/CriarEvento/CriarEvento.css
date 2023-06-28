@@ -1,0 +1,131 @@
+.imagePreviews {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.imagePreview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.criarEvento.boxPage .content {
+  width: 100%;
+  align-items: center;
+}
+
+.criarEvento .inputBox  {
+  max-width:600px;
+}
+
+.criarEvento .inputBox input,
+.criarEvento .inputBox textarea{
+  height: 25px;
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  padding-left: 5px;
+}
+
+.criarEvento .inputBox textarea {
+  height: 100px;
+  resize: none;
+}
+
+.criarEvento.boxPage .content {
+  display: grid;
+  grid-template-areas:
+    "h2 h2 h2"
+    "titulo titulo titulo"
+    "descricao descricao descricao"
+    "data hora hora"
+    "categoria preco preco"
+    "loc loc loc"
+    "imagem imagem x"
+    "bttn bttn bttn";
+  gap: 10px;
+  justify-content: center;
+}
+
+.criarEvento .h2 {
+  grid-area: h2;
+}
+
+.criarEvento .titulo {
+  grid-area: titulo;
+}
+
+.criarEvento .descricao {
+  grid-area: descricao;
+}
+
+.criarEvento .data {
+  grid-area: data;
+}
+
+.criarEvento .hora {
+  grid-area: hora;
+}
+
+.criarEvento .preco {
+  grid-area: preco;
+}
+
+.criarEvento .loc {
+  grid-area: loc;
+}
+
+.criarEvento .imagem {
+  grid-area: imagem;
+}
+
+.criarEvento .bttn {
+  grid-area: bttn;
+  justify-self: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  outline: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.criarEvento .bttn:hover {
+  outline-color: rgb(0, 0, 128);
+  outline-offset: 2px;
+  background-color: rgb(0, 0, 121);
+  color: #fff
+}
+
+.criarEvento .inputBox {
+  width: 100%;
+}
+
+.criarEvento .inputBox input,
+.criarEvento .inputBox textarea,
+.criarEvento .inputBox select {
+
+  height: 25px;
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  padding: 5px;
+}
+
+.criarEvento .inputBox textarea {
+  height: 100px;
+  resize: none;
+  width: 100%;
+}
+
+.imagePreview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 2px #fff;
+}
