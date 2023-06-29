@@ -7,6 +7,7 @@ import { comentar } from '../../../Authentication/Evento';
 import { v4 as uuidv4 } from 'uuid';
 import Loading from '../../Loading/Loading';
 import Modal from '../../Modal/Modal';
+import { useLocation } from 'react-router-dom';
 
 export default function EventDetail(props) {
   const event = props.event;
@@ -18,8 +19,11 @@ export default function EventDetail(props) {
   const [fadeModal, setFadeModal] = useState('');
   const [inscriptionStatus, setInscriptionStatus] = useState(false);
   const [buttonText, setButtonText] = useState('');
+  const [participantes, setParticipantes] = useState([]);
 
+  const location = useLocation();
   useEffect(() => {
+    getParticipants();
     getInscription();
     setLoading(true);
     comentar(5, event.evento_id, -1, '', (response) => {
@@ -84,6 +88,15 @@ export default function EventDetail(props) {
     });
   }
 
+  function getParticipants() {
+    const eventId = event.evento_id;
+    const currentId = localStorage.getItem('id');
+
+    comentar(8, eventId, currentId, '', (response) => {
+      setParticipantes(response)  
+    });
+  }
+
   return (
     <div className="eventDetail">
       <div className="leftContent">
@@ -92,9 +105,22 @@ export default function EventDetail(props) {
           src={url + (event.imagem_url === null ? 'evenly_logo.png' : event.imagem_url)}
           alt="teste"
         />
-        <button className={`inscrever ${inscriptionStatus ? 'checked' : ''}`} onClick={sendInscription} disabled={inscriptionStatus}>
+        {
+          location.pathname === '/account' ? 
+          (
+            <div className="participantes">
+              <h3>Participantes:</h3>
+              <ul>
+                {participantes.map((participant) => (
+                  <li key={uuidv4()}>{participant.user_name}</li>
+                ))}
+              </ul>
+            </div>
+            ) :
+          (<button className={`inscrever ${inscriptionStatus ? 'checked' : ''}`} onClick={sendInscription} disabled={inscriptionStatus}>
           {buttonText}
-        </button>
+          </button>)
+        }
       </div>
       <div className="eventContent">
         <div className="eventInfo">

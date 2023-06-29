@@ -44,13 +44,8 @@ export default function CriarEvento() {
         })
     }
 
-    const teste = () => {
-        console.log(categoria);
-    }
-
     return (
         <BoxPage className='updateEvent'>
-            <button onClick={()=>{teste()}}>teste</button>
             <h2>Atualizar evento</h2>
 
             <div className='inputBox'>

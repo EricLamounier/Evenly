@@ -154,3 +154,12 @@
 .eventDetail .inscrever:active {
     transform: translate(0.5px, 0.5px);
 }
+
+.eventDetail .participantes {
+    height: 90%;
+    width: 100%;
+}
+
+.eventDetail li {
+    list-style:circle;
+}
