@@ -36,7 +36,6 @@ export default function Account() {
       setId(data[0].user_id);
 
       setLoading(true);
-
       Cards(data[0].user_id, 0, (response) => {
         const eventosArray = Object.values(response);
         setEventos(eventosArray);

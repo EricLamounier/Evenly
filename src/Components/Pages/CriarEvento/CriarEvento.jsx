@@ -28,6 +28,7 @@ export default function CriarEvento() {
     if (isFormValid) {
       const uid = getUid();
       pegaDadosUser(uid).then((response) => {
+        console.log(response);
         inserirEvento(
           response[0].user_id,
           titulo,

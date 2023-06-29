@@ -163,7 +163,7 @@ export function atualizarEvento(id, titulo, descricao, categoria, data, hora, pr
     formData.append("hora", hora);
     formData.append("preco", parseFloat(preco));
     formData.append("local", local);
-    formData.append("id", id);
+    formData.append("evento_id", id);
 
     const categorias = [
         'Festa',

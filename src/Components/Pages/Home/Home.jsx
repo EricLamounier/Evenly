@@ -19,9 +19,8 @@ export default function Home() {
     setId(localStorage.getItem('id'));
 
     setLoading(<Loading/>);
-
     //pega os dados do usuario autenticado
-    Cards(CurrentId, 1, (response) => {
+    Cards(localStorage.getItem('id'), 1, (response) => {
       const eventosArray = Object.values(response);
       setEventos(eventosArray);
       setLoading('');
