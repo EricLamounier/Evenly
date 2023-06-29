@@ -81,3 +81,16 @@
     display: flex;
     align-items: center;
 }
+
+.cardEvent .editEvent {
+    background-color: #fff;
+    padding: 5px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: rgb(0, 0, 129);
+}
+
+.cardEvent .editEvent:hover {
+    background-color: rgb(0, 0, 132);
+    color: #fff;
+}

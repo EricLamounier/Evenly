@@ -1,4 +1,4 @@
-.accountDetails {
+.account {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-.accountDetails hr {
+.account hr {
     width: 100%;
 }
 
@@ -16,3 +16,23 @@
     flex-wrap: wrap;
   }
   
+
+.accountDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+.accountDetails .editAccount {
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;
+}
+
+.accountDetails .editAccount:hover {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}

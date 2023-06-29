@@ -3,7 +3,7 @@ import './CriarEvento.css';
 import BoxPage from '../../BoxPage/BoxPage';
 import { pegaDadosUser } from '../../../Authentication/User';
 import { getUid } from '../../../Firebase/Authentication';
-import { Evento, enviarImagem } from '../../../Authentication/Evento';
+import { inserirEvento, enviarImagem } from '../../../Authentication/Evento';
 import Loading from '../../Loading/Loading';
 import Modal from '../../Modal/Modal';
 
@@ -28,7 +28,7 @@ export default function CriarEvento() {
     if (isFormValid) {
       const uid = getUid();
       pegaDadosUser(uid).then((response) => {
-        Evento(
+        inserirEvento(
           response[0].user_id,
           titulo,
           descricao,

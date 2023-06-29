@@ -81,9 +81,10 @@ export default function Account() {
 
   return (
     <BoxPage>
-      <div className="accountDetails">
+      <div className="account">
         <h2>Sua conta Evenly</h2>
-        <div>
+        <div className='accountDetails'>
+          <div>
           <p>Nome: {name}</p>
           <p>Email: {email}</p>
           <p>
@@ -96,11 +97,12 @@ export default function Account() {
               ? 'Administrador'
               : false}
           </p>
+          </div>
 
           <Link
             to={`/editarConta?&email=${email}&nome=${name}&tipoUsuario=${tipo}&id=${id}&uid=${uid}`}
           >
-            <button>Editar conta</button>
+            <button className='editAccount'>Editar conta</button>
           </Link>
         </div>
         <hr />

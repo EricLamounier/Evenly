@@ -4,7 +4,7 @@ import liked from '../../Images/icons/like-fill.svg';
 import comment from '../../Images/icons/chat.svg';
 import EventoInfo from '../EventoInfo/EventoInfo';
 import { useState, useEffect } from 'react';
-
+import { useLocation, Link } from 'react-router-dom';
 import { curtir } from '../../Authentication/Evento';
 
 export default function CardEvent(props) {
@@ -16,6 +16,7 @@ export default function CardEvent(props) {
   const [countComment, setCountComment] = useState('');
   const [userCard, setUserCard] = useState('');
 
+  const location = useLocation();
   useEffect(() => {
 
     setUserCard(props.data.user_name);
@@ -76,6 +77,11 @@ export default function CardEvent(props) {
           />
           <span>{countLike}</span>
         </div>
+        {
+          location.pathname === '/account' && (
+            <Link className='editEvent' to={`/editarEvento?data=${encodeURIComponent(JSON.stringify(props.data))}`}>editar</Link>
+            )
+        }
         <div className="likeBox">
           <span>{countComment}</span>
           <img

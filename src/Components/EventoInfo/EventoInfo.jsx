@@ -3,7 +3,6 @@ import plus from '../../Images/icons/plus.svg';
 import trash from '../../Images/icons/trash.svg';
 import { useLocation } from 'react-router-dom';
 import { excluirEvento } from '../../Authentication/Evento';
-import { Link } from 'react-router-dom';
 
 export default function EventoInfo(props) {
 
@@ -37,11 +36,6 @@ export default function EventoInfo(props) {
             onClick={()=>{handleDelete(props.data.evento_id)}}
           />
         )
-      }
-      {
-        location.pathname === '/account' && (
-          <Link to={`/editarEvento?data=${encodeURIComponent(JSON.stringify(props.data))}`}>editar</Link>
-          )
       }
     </div>
   );
