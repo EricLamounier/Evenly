@@ -3,6 +3,9 @@ import BoxPage from '../../BoxPage/BoxPage';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { atualizarEvento, retornaCategoria } from '../../../Authentication/Evento';
+import Loading from '../../Loading/Loading';
+import Modal from '../../Modal/Modal';
+
 export default function CriarEvento() {
 
     const [titulo, setTitulo] = useState('')
@@ -13,10 +16,10 @@ export default function CriarEvento() {
     const [categoria, setCategoria] = useState('');
     const [local, setLocal] = useState('');
     const [catId, setCadId] = useState('');
-    const [imagePreview, setImagePreview] = useState('');
-    const [image, setImage] = useState(null);
-
+    const [modal, setModal] = useState(false);
+    const [fadeModal, setFadeModal] = useState('');
     const location = useLocation();
+    const [loading, setLoading] = useState('Atualizar evento');
 
     // Obtém o valor do parâmetro "data" da URL
     const queryParams = new URLSearchParams(location.search);
@@ -41,20 +44,25 @@ export default function CriarEvento() {
     },[])
 
     const handleSubmit = () =>{
+        setLoading(<Loading/>)
         atualizarEvento(event.evento_id, titulo, descricao, categoria, data, hora, preco, local, 3, response =>{
-            alert('foi')
+            editadoSucesso();
+            setLoading('Atualizar evento');
         })
     }
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const preview = URL.createObjectURL(file);
-          setImage(file);
-          setImagePreview(preview);
-        }
-      };
-      
+    function editadoSucesso(){
+        setModal(true);
+        setTimeout(() => {
+            setFadeModal('hide')
+            setTimeout(() => {
+                setFadeModal('')
+                setModal(false);
+            }, 1000)
+    
+        }, 3000);
+    }
+
     return (
         <BoxPage className='updateEvent'>
             <h2 className='h2'>Atualizar evento</h2>
@@ -130,7 +138,7 @@ export default function CriarEvento() {
                 />
             </div>
 
-            <div className='inputBox local'>
+            <div className='inputBox loc'>
                 <label>Local do evento:</label>
                 <input 
                     type='text'
@@ -141,22 +149,13 @@ export default function CriarEvento() {
                 />
             </div>
 
-            <div className='inputBox img'>
-                <label>Imagem do evento:</label>
-                <input
-                type='file'
-                accept='image/*'
-                onChange={handleImageChange}
-                required
-                />
-            </div>
+            <button className='bttn' onClick={handleSubmit}>{loading}</button>
 
-            {imagePreview && (
-                <div className='imagePreviewContainer img'>
-                <img src={imagePreview} alt='Preview' className='imagePreview' />
-                </div>
+            {modal && (
+            <Modal 
+                className={`sucess ${fadeModal}`} 
+                message="Evento atualizado com sucesso!" />
             )}
-            <button className='bttn' onClick={handleSubmit}>Atualizar evento</button>
         </BoxPage>
     );
 }

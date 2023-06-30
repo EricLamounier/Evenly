@@ -31,7 +31,6 @@
       "data hora hora"
       "categoria preco preco"
       "loc loc loc"
-      "imagem imagem x"
       "bttn bttn bttn";
     gap: 10px;
     justify-content: center;
@@ -63,10 +62,6 @@
   
   .updateEvent .loc {
     grid-area: loc;
-  }
-  
-  .updateEvent .imagem {
-    grid-area: imagem;
   }
   
   .updateEvent .bttn {
