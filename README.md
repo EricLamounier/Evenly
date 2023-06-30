@@ -1,8 +1,8 @@
 Projeto construído para a disciplina SIN143 - Laboratório de Programação, ministrada pelo professor Clausius Reis na Universidade Federal de Viçosa como trabalho final da disciplina
 
-<div style="display: flex">
-    <img src="git/previewHome.png" style="width: 50%" alt="pagina home">
-    <img src="git/previewLogin.png" style="width: 50%" alt="pagina login">
+<div align="center" style="margin: 10px">
+    <img style="height: 240px; object-fit: cover; margin-right: 10px;" src="git/previewLogin.png" alt="notebook preview">
+    <img style="height: 240px" src="git/previewHome.png" alt="notebook preview">
 </div>
 
 ## Para o professor:
