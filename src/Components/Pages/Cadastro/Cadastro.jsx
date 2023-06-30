@@ -8,7 +8,7 @@ import Loading from '../../Loading/Loading';
 import { signUp } from '../../../Firebase/Authentication';
 import { validarCadastro } from '../../../Authentication/ValidarCadastro';
 import './Cadastro.css';
-import { User } from '../../../Authentication/User';
+import { cadastrar } from '../../../Authentication/User';
 
 export default function Cadastro() {
     const [nome, setNome] = useState("");
@@ -54,7 +54,7 @@ export default function Cadastro() {
         
         signUp(email, senha)
         .then((uid) => {
-          User(uid, nome, email, tipoUsuario, 0, (response)=>{
+          cadastrar(uid, nome, email, tipoUsuario, 0, (response)=>{
               console.log(response);
               localStorage.setItem('user_name', nome);
               localStorage.setItem('id', response)

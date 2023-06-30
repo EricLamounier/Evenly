@@ -13,6 +13,8 @@ export default function CriarEvento() {
     const [categoria, setCategoria] = useState('');
     const [local, setLocal] = useState('');
     const [catId, setCadId] = useState('');
+    const [imagePreview, setImagePreview] = useState('');
+    const [image, setImage] = useState(null);
 
     const location = useLocation();
 
@@ -44,11 +46,20 @@ export default function CriarEvento() {
         })
     }
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const preview = URL.createObjectURL(file);
+          setImage(file);
+          setImagePreview(preview);
+        }
+      };
+      
     return (
         <BoxPage className='updateEvent'>
-            <h2>Atualizar evento</h2>
+            <h2 className='h2'>Atualizar evento</h2>
 
-            <div className='inputBox'>
+            <div className='inputBox titulo'>
                 <label>Titulo do evento:</label>
                 <input 
                     type='text' 
@@ -59,9 +70,9 @@ export default function CriarEvento() {
                 />
             </div>
 
-            <div className='inputBox'>
+            <div className='inputBox descricao'>
                 <label>Descrição do evento:</label>
-                <input 
+                <textarea 
                     type='text'
                     value={descricao}
                     onChange={(e)=>{setDescricao(e.target.value)}}
@@ -70,7 +81,7 @@ export default function CriarEvento() {
                 />
             </div>
 
-            <div className='inputBox'>
+            <div className='inputBox data'>
                 <label>Data do evento:</label>
                 <input 
                     type='date' 
@@ -80,7 +91,7 @@ export default function CriarEvento() {
                 />
             </div>
 
-            <div className='inputBox'>
+            <div className='inputBox hora'>
                 <label>Hora do evento:</label>
                 <input 
                     type='time'
@@ -91,7 +102,7 @@ export default function CriarEvento() {
                 />
             </div>
 
-            <div className='inputBox'>
+            <div className='inputBox categoria'>
                 <label>Categoria</label>
                 <select 
                     name="categoria" 
@@ -108,7 +119,7 @@ export default function CriarEvento() {
                 </select>
             </div>
 
-            <div className='inputBox'>
+            <div className='inputBox preco'>
                 <label>Preço do evento:</label>
                 <input 
                     type='text'
@@ -119,7 +130,7 @@ export default function CriarEvento() {
                 />
             </div>
 
-            <div className='inputBox'>
+            <div className='inputBox local'>
                 <label>Local do evento:</label>
                 <input 
                     type='text'
@@ -129,7 +140,23 @@ export default function CriarEvento() {
                     required
                 />
             </div>
-            <button onClick={handleSubmit}>Atualizar evento</button>
+
+            <div className='inputBox img'>
+                <label>Imagem do evento:</label>
+                <input
+                type='file'
+                accept='image/*'
+                onChange={handleImageChange}
+                required
+                />
+            </div>
+
+            {imagePreview && (
+                <div className='imagePreviewContainer img'>
+                <img src={imagePreview} alt='Preview' className='imagePreview' />
+                </div>
+            )}
+            <button className='bttn' onClick={handleSubmit}>Atualizar evento</button>
         </BoxPage>
     );
 }

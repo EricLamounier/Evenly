@@ -1,0 +1,109 @@
+
+.updateEvent.boxPage .content {
+    width: 100%;
+    align-items: center;
+  }
+  
+  .updateEvent .inputBox  {
+    max-width:600px;
+  }
+  
+  .updateEvent .inputBox input,
+  .updateEvent .inputBox textarea{
+    height: 25px;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    padding-left: 5px;
+  }
+  
+  .updateEvent .inputBox textarea {
+    height: 100px;
+    resize: none;
+  }
+  
+  .updateEvent.boxPage .content {
+    display: grid;
+    grid-template-areas:
+      "h2 h2 h2"
+      "titulo titulo titulo"
+      "descricao descricao descricao"
+      "data hora hora"
+      "categoria preco preco"
+      "loc loc loc"
+      "imagem imagem x"
+      "bttn bttn bttn";
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .updateEvent .h2 {
+    grid-area: h2;
+  }
+  
+  .updateEvent .titulo {
+    grid-area: titulo;
+  }
+  
+  .updateEvent .descricao {
+    grid-area: descricao;
+  }
+  
+  .updateEvent .data {
+    grid-area: data;
+  }
+  
+  .updateEvent .hora {
+    grid-area: hora;
+  }
+  
+  .updateEvent .preco {
+    grid-area: preco;
+  }
+  
+  .updateEvent .loc {
+    grid-area: loc;
+  }
+  
+  .updateEvent .imagem {
+    grid-area: imagem;
+  }
+  
+  .updateEvent .bttn {
+    grid-area: bttn;
+    justify-self: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+    outline: 2px solid transparent;
+    transition: 0.2s;
+  }
+  
+  .updateEvent .bttn:hover {
+    outline-color: rgb(0, 0, 128);
+    outline-offset: 2px;
+    background-color: rgb(0, 0, 121);
+    color: #fff
+  }
+  
+  .updateEvent .inputBox {
+    width: 100%;
+  }
+  
+  .updateEvent .inputBox input,
+  .updateEvent .inputBox textarea,
+  .updateEvent .inputBox select {
+  
+    height: 25px;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    padding: 5px;
+  }
+  
+  .updateEvent .inputBox textarea {
+    height: 100px;
+    resize: none;
+    width: 100%;
+  }

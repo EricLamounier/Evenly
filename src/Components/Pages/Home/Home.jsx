@@ -1,7 +1,6 @@
 import './Home.css';
 import { useEffect, useState } from 'react';
 import BoxPage from '../../BoxPage/BoxPage';
-import NewEventButton from '../../NewEventButton/NewEventButton'
 import { Cards } from '../../../Authentication/Cards';
 import CardEvent from '../../CardEvent/CardEvent';
 import EventDetail from '../EventDetail/EventDetail';
@@ -11,12 +10,9 @@ export default function Home() {
   const [eventos, setEventos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [CurrentId, setId] = useState('');
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-
-    setId(localStorage.getItem('id'));
 
     setLoading(<Loading/>);
     //pega os dados do usuario autenticado

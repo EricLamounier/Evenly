@@ -2,7 +2,7 @@ import './EditarConta.css';
 import BoxPage from '../../BoxPage/BoxPage';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { User } from '../../../Authentication/User';
+import { atualizar } from '../../../Authentication/User';
 import Loading from '../../Loading/Loading';
 import { changeEmail } from '../../../Firebase/Authentication';
 import { resetPassword } from '../../../Firebase/Authentication';
@@ -40,7 +40,7 @@ export default function EditarConta() {
     const handleSubmit = () => {
         setLoading(<Loading/>)
         changeEmail(email);
-        User(uid, name, email, tipoUsuario, 2, (response)=>{
+        atualizar(uid, name, email, tipoUsuario, 2, (response)=>{
             if(response.success){
                 setLoading('Atualizar registro');
                 setMsg('Conta editada com sucesso!');
