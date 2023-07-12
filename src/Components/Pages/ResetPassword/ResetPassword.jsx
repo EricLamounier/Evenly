@@ -1,18 +1,34 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 
-import { auth } from '../../../Firebase/Authentication'
 import { resetPassword } from '../../../Firebase/Authentication';
 import Container from '../../Container/Container';
+import Modal from '../../Modal/Modal';
 
 import './ResetPassword.css'
 
 export default function ResetPassword(){
 
     const [email, setEmail] = useState('');
+    const [modal, setModal] = useState(false);
+    const [fadeModal, setFadeModal] = useState('');
 
     const handleSubmit = (event) => {
-        resetPassword(email);
+        resetPassword(email, response => {
+            sucess()
+        });
+    }
+
+    function sucess(){
+        setModal(true);
+        setTimeout(() => {
+            setFadeModal('hide')
+            setTimeout(() => {
+                setFadeModal('')
+                setModal(false);
+            }, 1000)
+    
+        }, 3000);
     }
 
     return (
@@ -33,6 +49,13 @@ export default function ResetPassword(){
             </form>
             <br/><br/>
             <Link className="authLink" to="/">Voltar</Link>
+
+            {modal && 
+            (
+            <Modal 
+                className={`sucess ${fadeModal}`} 
+                message='Email de verificação enviado!'
+            />)}
         </Container>
     )
 }

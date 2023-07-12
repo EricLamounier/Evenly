@@ -20,6 +20,7 @@ export default function CriarEvento() {
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState('');
   const [fadeModal, setFadeModal] = useState('');
+
  
   const handleSubmit = () => {
     const isFormValid = validateForm();
@@ -45,7 +46,7 @@ export default function CriarEvento() {
             }
           }
         );
-        alert('cadastrado com sucesso');
+        sucess();
         setLoading(false);
       });
     } else {
@@ -73,6 +74,18 @@ export default function CriarEvento() {
       local !== ''
     );
   };
+
+  function sucess(){
+    setModal(true);
+    setTimeout(() => {
+        setFadeModal('hide')
+        setTimeout(() => {
+            setFadeModal('')
+            setModal(false);
+        }, 1000)
+
+    }, 3000);
+}
 
   return (
     <BoxPage className='criarEvento'>
